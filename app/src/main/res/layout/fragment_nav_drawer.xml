@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
+    android:fillViewport="true"
+    android:background="@color/colorTransparent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/colorNavigation_drawer_bg"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/fragment_navigation_drawer_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding_textview"
+            android:drawableRight="@android:drawable/ic_delete"
+            />
+
+        <TextView
+            android:id="@+id/fragment_navigation_drawer_home"
+            style="@style/NavigationDrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/nav_drawer_item_home"
+            />
+
+        <TextView
+            android:id="@+id/fragment_navigation_drawer_about_us"
+            style="@style/NavigationDrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/nav_drawer_item_about_us"
+            />
+    </LinearLayout>
+</ScrollView>
