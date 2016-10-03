@@ -12,7 +12,7 @@ import java.util.List;
  * Created by yogesh.kalwar on 03/10/2016.
  */
 
-public abstract class BaseSyncService {
+public abstract class BaseSyncService implements Runnable{
 
     public static enum SyncMode{
         IN_BATCH;
@@ -24,17 +24,29 @@ public abstract class BaseSyncService {
     protected static final String ARG_SYNC_REQ_ID = "sync_service_req_id";
 
     private final List<SyncListener> _arrSyncListeners = new ArrayList<SyncListener>();
-    
-    protected void onHandleIntent(Intent intent) {
-        int iReqId = intent.getExtras().getInt(ARG_SYNC_REQ_ID, -1);
-        processRequest(intent.getExtras());
+
+    protected final Bundle _oRequestData;
+
+    public BaseSyncService(final Bundle bundle, SyncListener listener){
+        _oRequestData = bundle;
+        addListener(listener);
+    }
+
+    @Override
+    public void run() {
+        if (_oRequestData == null){
+            throw new IllegalArgumentException("Request parameters not provided");
+        }
+
+        int iReqId = _oRequestData.getInt(ARG_SYNC_REQ_ID, -1);
+        processRequest();
         //update complete status to caller if its requested, -1 means no listening
         if (iReqId > -1) {
             updateSyncComplete(iReqId);
         }
     }
 
-    abstract void processRequest(final Bundle data);
+    abstract void processRequest();
 
     /***/
     public void addListener(final SyncListener listener){

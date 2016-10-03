@@ -13,20 +13,21 @@ public class SyncService extends BaseSyncService{
 
     private static final String ARG_SYNC_PAGE_NO = "sync_service_page_no";
 
-    public static void startBatchSync(final Context context, int page, int id, SyncListener listener){
+    public static SyncService startBatchSync(final Context context, int page, int id, SyncListener listener){
         final Bundle bundle = new Bundle();
         bundle.putInt(ARG_SYNC_MODE, SyncMode.IN_BATCH.ordinal());
         bundle.putInt(ARG_SYNC_PAGE_NO, page);
         bundle.putInt(ARG_SYNC_REQ_ID, id);
 
+        return new SyncService(bundle, listener);
     }
 
-    public SyncService() {
-        super(SyncService.class.getSimpleName());
+    private SyncService(final Bundle bundle, final SyncListener listener) {
+        super(bundle, listener);
     }
 
     @Override
-    void processRequest(Bundle data) {
+    void processRequest() {
 
     }
 }
