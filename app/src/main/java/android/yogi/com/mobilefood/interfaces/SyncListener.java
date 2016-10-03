@@ -8,4 +8,5 @@ public interface SyncListener {
     public void onSyncCompleted();
     public void onSyncFailed();
     public void onSyncCancelled();
+    public boolean isMyRequest(int id);
 }
